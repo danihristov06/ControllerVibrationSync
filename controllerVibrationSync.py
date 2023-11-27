@@ -58,14 +58,14 @@ def analyze_continuous_real_time_audio():
         # if(mean(magnitudes_db[0:800])):
         # print(abs(mean1 - meanOld))
         print(mean(magnitudes_db[50:300]))
-        # if(abs(mean1 - meanOld) > threshold and disconnected == False):
-        if(mean(magnitudes_db[50:300]) > thresholdDB and disconnected == False):
+        if(abs(mean1 - meanOld) > threshold and disconnected == False): #based on sudden changes in the sound
+        # if(mean(magnitudes_db[50:300]) > thresholdDB and disconnected == False): #activates when you reach a cerain volume level
             # mouse.drag(35, 285, 35, 285, absolute=True, duration=0) #scr 1
             if(clicked == False):
                 driver.find_element("xpath", "//button[contains(text(),'Go')]").click()#put here the content you have put in Notepad, ie the XPath
                 clicked = True
-            print(clicked)
-        if(mean(magnitudes_db[50:300]) < thresholdDB and clicked == True):
+        if(abs(mean1 - meanOld) < threshold and clicked == True): #based on sudden changes in the sound but to turn it off
+        # if(mean(magnitudes_db[50:300]) < thresholdDB and clicked == True): #deactivates when you reach a ceratin volume level
             driver.find_element("xpath", "//button[contains(text(),'Stop')]").click()#put here the content you have put in Notepad, ie the XPath
             clicked = False
             # os.popen("curl https://trigger.macrodroid.com/cfbe1ca8-0398-4df3-8d46-25f1bae001ae/vibrate")
